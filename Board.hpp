@@ -46,6 +46,12 @@ class Board {
 
     // returns true iff the board contains one or more soldiers of the given player.
     bool has_soldiers(uint player_number) const;
+    
+    //return the closest soldier of player_number to the place{placeRow,laceCol}.
+    Soldier* findClosest(uint player_number, uint placeRow,uint placeCol );
+
+    //return the costest soldier of player_number.
+    Soldier* findCostest(uint player_number);
 };
 
 }

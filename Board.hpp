@@ -13,7 +13,7 @@
 #include <stdexcept>
 #include "Soldier.hpp"
 
-
+//class Soldier{};
 namespace WarGame {
 
 class Board {
@@ -52,6 +52,14 @@ class Board {
 
     //return the costest soldier of player_number.
     Soldier* findCostest(uint player_number);
+    
+    //Start power of all the soldier that this key belong to them
+    void powerAll(int key);
+
+    ~Board()
+    {
+      board.clear();
+    }
 };
 
 }

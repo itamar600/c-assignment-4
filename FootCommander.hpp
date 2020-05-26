@@ -14,7 +14,7 @@ class FootCommander: public Soldier{
         life= HEALTH;
     }
 
-    void power(void* board, int key);
+    void power(void* b, int key);
 
     void changeLife(int num);
 
@@ -27,6 +27,8 @@ class FootCommander: public Soldier{
     int getCol();
 
     int getTeam();
+
+    int getLife();
    
     bool isAlive();
 

@@ -2,7 +2,14 @@
 #include "Board.hpp"
 
 
-void FootCommander::power(void* board, int key){
+void FootCommander::power(void* b, int key){
+    if(key!= ALLKEY)
+        return;
+    WarGame::Board* board;
+    board=(WarGame::Board*) b;
+    Soldier* s= board->findClosest(this->team, this->row, this->col);
+    s->changeLife(-DAMAGE);
+    board->powerAll(this->team, FOOTKEY);
 
 }
 
@@ -29,6 +36,10 @@ int FootCommander::getCol(){
 
 int FootCommander::getTeam(){
     return this->team;
+}
+
+int FootCommander::getLife(){
+    return this->life;
 }
 
 bool FootCommander::isAlive(){

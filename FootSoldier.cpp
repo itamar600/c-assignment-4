@@ -1,8 +1,13 @@
 #include "FootSoldier.hpp"
 #include "Board.hpp"
 
-void FootSoldier::power(void* board, int key){
-
+void FootSoldier::power(void* b, int key){
+    if(key!= FOOTKEY && key!= ALLKEY)
+        return;
+    WarGame::Board* board;
+    board=(WarGame::Board*) b;
+    Soldier* s= board->findClosest(this->team, this->row, this->col);
+    s->changeLife(-DAMAGE);
 }
 
 void FootSoldier::changeLife(int num){
@@ -27,6 +32,10 @@ int FootSoldier::getCol(){
 
 int FootSoldier::getTeam(){
     return this->team;
+}
+
+int FootSoldier::getLife(){
+    return this->life;
 }
 
 bool FootSoldier::isAlive(){

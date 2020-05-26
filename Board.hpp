@@ -45,7 +45,7 @@ class Board {
     void move(uint player_number, std::pair<int,int> source, MoveDIR direction);
 
     // returns true iff the board contains one or more soldiers of the given player.
-    bool has_soldiers(uint player_number) const;
+    bool has_soldiers(uint player_number);
     
     //return the closest soldier of player_number to the place{placeRow,laceCol}.
     Soldier* findClosest(uint player_number, uint placeRow,uint placeCol );
@@ -54,7 +54,7 @@ class Board {
     Soldier* findCostest(uint player_number);
     
     //Start power of all the soldier that this key belong to them
-    void powerAll(int key);
+    void powerAll(int player_number, int key);
 
     ~Board()
     {

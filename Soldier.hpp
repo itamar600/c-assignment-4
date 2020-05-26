@@ -7,7 +7,7 @@
 class Soldier{
     public:
 
-    virtual void power(void* board, int key)=0;
+    virtual void power(void* b, int key)=0;
 
     virtual void changeLife(int num)=0;
 
@@ -20,6 +20,8 @@ class Soldier{
     virtual int getCol()=0;
 
     virtual int getTeam()=0;
+
+    virtual int getLife()=0;
 
     virtual bool isAlive()=0;
 

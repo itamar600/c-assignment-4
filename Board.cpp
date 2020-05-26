@@ -1,8 +1,4 @@
 #include "Board.hpp"
-#define ALLKEY 0
-#define FOOTKEY 1
-#define SNIPERKEY 2
-#define PARAMEDICKEY 3
 using namespace WarGame;
 
 static int count=0;

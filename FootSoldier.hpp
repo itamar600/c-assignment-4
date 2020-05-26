@@ -1,8 +1,9 @@
 #pragma once
 #include "Soldier.hpp"
-#define FOOTKEY 1
+#define DAMAGE 10
+#define HEALTH 100
 class FootSoldier: public Soldier{
-    int row, col, team;
+    int row, col, team, life;
 
     public:
     
@@ -10,6 +11,7 @@ class FootSoldier: public Soldier{
         this->team= team;
         row=-1;
         col=-1;
+        life= HEALTH;
     }
 
     void power(void* board, int key);
@@ -25,4 +27,10 @@ class FootSoldier: public Soldier{
     int getCol();
 
     int getTeam();
+    
+    bool isAlive();
+
+    // ~FootSoldier(){
+    //     delete(this);
+    // }
 };

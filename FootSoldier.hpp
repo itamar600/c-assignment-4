@@ -1,6 +1,6 @@
 #pragma once
 #include "Soldier.hpp"
-#define DAMAGE 10
+#define DAMAGE -10
 #define HEALTH 100
 class FootSoldier: public Soldier{
     int row, col, team, life;

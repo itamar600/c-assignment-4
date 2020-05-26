@@ -4,6 +4,7 @@
 #define FOOTKEY 1
 #define SNIPERKEY 2
 #define PARAMEDICKEY 3
+#define FULLHEALTH 0
 class Soldier{
     public:
 

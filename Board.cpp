@@ -71,13 +71,14 @@ bool Board::has_soldiers(uint player_number){
     //     count++; 
     //     return true;
     // }
+    Soldier* temp;
     for(int i=0; i< board.size(); i++){
         for(int j=0; j< board[0].size(); j++){
             if(board[i][j]!=NULL){
-                Soldier* temp= board[i][j];
+                temp= board[i][j];
                 if(temp->isAlive()){
                     if(temp->getTeam()==player_number)
-                    return true;
+                        return true;
                 }
                 else{
                     board[i][j]=NULL;
@@ -98,10 +99,10 @@ Soldier* Board::findClosest(uint player_number, uint placeRow,uint placeCol ){
             if(i==placeRow && j==placeCol)
                 continue;
             if(board[i][j]!=NULL){
-                Soldier* temp= board[i][j];
+                temp= board[i][j];
                 distT=sqrt(pow(temp->getRow()-placeRow,2)+pow(temp->getCol()-placeCol,2));
                 if(temp->isAlive()){
-                    if(temp->getTeam()==player_number){
+                    if(temp->getTeam()!=player_number){
                         if(closest==NULL){
                             closest=temp;
                             distC=distT;
@@ -126,15 +127,16 @@ Soldier* Board::findClosest(uint player_number, uint placeRow,uint placeCol ){
 
 Soldier* Board::findCostest(uint player_number){
     Soldier* costest=NULL;
+    Soldier* temp;
     for(int i=0; i< board.size(); i++){
         for(int j=0; j< board[0].size(); j++){
             if(board[i][j]!=NULL){
-                Soldier* temp= board[i][j];
+                temp= board[i][j];
                 if(temp->isAlive()){
-                    if(temp->getTeam()==player_number){
+                    if(temp->getTeam()!=player_number){
                         if(costest==NULL)
                             costest=temp;
-                        else if(costest->getLife()>temp->getLife())
+                        else if(costest->getLife()<temp->getLife())
                                 costest=temp;
                     }
                 }

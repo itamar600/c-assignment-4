@@ -7,11 +7,14 @@ void FootSoldier::power(void* b, int key){
     WarGame::Board* board;
     board=(WarGame::Board*) b;
     Soldier* s= board->findClosest(this->team, this->row, this->col);
-    s->changeLife(-DAMAGE);
+    s->changeLife(DAMAGE);
 }
 
 void FootSoldier::changeLife(int num){
-    this->life+=num;
+     if(num==FULLHEALTH)
+        this->life=HEALTH;
+    else
+        this->life+=num;
 }
 
 void FootSoldier::setRow(int row){

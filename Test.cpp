@@ -2,6 +2,10 @@
 #include "Board.hpp"
 #include "FootCommander.hpp"
 #include "FootSoldier.hpp"
+#include "Sniper.hpp"
+#include "SniperCommander.hpp"
+#include "Paramedic.hpp"
+#include "ParamedicCommander.hpp"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -197,37 +201,85 @@ TEST_CASE("Foot"){
     CHECK(board.has_soldiers(1)==true);
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {3,7}, Board::MoveDIR::Up);
+    cout<<board[{5,7}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {3,3}, Board::MoveDIR::Up);
+    cout<<board[{5,7}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {3,0}, Board::MoveDIR::Up);
+    cout<<board[{5,0}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {4,7}, Board::MoveDIR::Down);
+    cout<<board[{5,7}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {4,3}, Board::MoveDIR::Down);
+    cout<<board[{5,7}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {4,0}, Board::MoveDIR::Down);
+    //cout<<board[{5,0}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {3,7}, Board::MoveDIR::Up);
+    cout<<board[{5,7}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {3,3}, Board::MoveDIR::Up);
+    cout<<board[{5,7}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {3,0}, Board::MoveDIR::Up);
+    //cout<<board[{5,0}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {4,7}, Board::MoveDIR::Down);
+    cout<<board[{5,7}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {4,3}, Board::MoveDIR::Down);
+    cout<<board[{5,7}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {4,0}, Board::MoveDIR::Down);
+    //cout<<board[{5,0}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {3,7}, Board::MoveDIR::Up);
+    cout<<board[{5,7}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {3,3}, Board::MoveDIR::Up);
+    cout<<board[{5,7}]->isAlive()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==true);
     board.move(1, {3,0}, Board::MoveDIR::Up);
-    board.move(1, {4,7}, Board::MoveDIR::Down);
+    //cout<<board[{5,0}]->getLife()<<"\n"<<endl;
     CHECK(board.has_soldiers(2)==false);
     CHECK_THROWS_AS(board.move(2, {5,7}, Board::MoveDIR::Up), std::invalid_argument);
     CHECK_THROWS_AS(board.move(2, {5,3}, Board::MoveDIR::Up), std::invalid_argument);
     CHECK_THROWS_AS(board.move(2, {5,0}, Board::MoveDIR::Up), std::invalid_argument);
+}
+TEST_CASE("Sniper"){
+    WarGame::Board board( 8,  8);
+    board[{3,7}] = new Sniper(1);
+    board[{3,3}] = new SniperCommander(1);
+	board[{5,0}] = new FootCommander(2);
+    board[{5,7}] = new FootSoldier(2);
+    board.move(1, {3,7}, Board::MoveDIR::Up);
+    board.move(1, {3,3}, Board::MoveDIR::Up);
+    CHECK(board.has_soldiers(2)==true);
+    CHECK_THROWS_AS(board.move(2, {5,7}, Board::MoveDIR::Up), std::invalid_argument);
+    board.move(1, {4,7}, Board::MoveDIR::Up);
+    CHECK(board.has_soldiers(2)==false);
+}
+
+TEST_CASE("Paramedic"){
+    WarGame::Board board( 8,  8);
+    board[{3,7}] = new Sniper(1);
+    board[{3,3}] = new SniperCommander(1);
+    board[{5,6}] = new Paramedic(2);
+    board[{5,1}] = new ParamedicCommander(2);
+	board[{5,0}] = new FootSoldier(2);
+    board[{5,7}] = new FootSoldier(2);
+    board.move(1, {3,7}, Board::MoveDIR::Up);
+    board.move(1, {3,3}, Board::MoveDIR::Up);
+    board.move(1, {4,7}, Board::MoveDIR::Down);
+    CHECK(board.has_soldiers(2)==true);
+    board.move(2, {5,1}, Board::MoveDIR::Up);
+    board.move(1, {4,3}, Board::MoveDIR::Up);
+    board.move(1, {3,7}, Board::MoveDIR::Up);
+    board.move(1, {4,7}, Board::MoveDIR::Down);
+    CHECK(board.has_soldiers(2)==false);
+    board.move(1, {5,3}, Board::MoveDIR::Down);
+    CHECK(board.has_soldiers(2)==false);
 }

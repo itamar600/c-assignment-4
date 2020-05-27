@@ -1,5 +1,6 @@
 #include "Board.hpp"
 #include <cmath>
+#include <iostream>
 using namespace WarGame;
 
 // static int count=0;
@@ -112,11 +113,13 @@ Soldier* Board::findClosest(uint player_number, uint placeRow,uint placeCol ){
                         if(closest==NULL){
                             closest=temp;
                             distC=distT;
+                            //std::cout<< "<"<<i<<","<<j<<">\n"<< std::endl;
                         }
                         else {
                             if(distT<distC){
                                 closest=temp;
-                                distC=distT; 
+                                distC=distT;
+                                //std::cout<< "<"<<i<<","<<j<<">\n"<< std::endl; 
                             }
                         }
                     }

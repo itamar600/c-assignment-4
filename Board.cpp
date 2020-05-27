@@ -30,6 +30,7 @@ void Board::move(uint player_number, std::pair<int,int> source, Board::MoveDIR d
         board[x+1][y]=temp;
         board[x][y]=NULL;
         temp->setRow(x+1);
+        temp->setCol(y);
         temp->power(&board,ALLKEY);
         break;
        
@@ -39,6 +40,7 @@ void Board::move(uint player_number, std::pair<int,int> source, Board::MoveDIR d
         board[x-1][y]=temp;
         board[x][y]=NULL;
         temp->setRow(x-1);
+        temp->setCol(y);
         temp->power(&board,ALLKEY);
         break;
 
@@ -47,7 +49,8 @@ void Board::move(uint player_number, std::pair<int,int> source, Board::MoveDIR d
             throw std::invalid_argument(" ");
         board[x][y+1]=temp;
         board[x][y]=NULL;
-        temp->setRow(y+1);
+        temp->setCol(y+1);
+        temp->setRow(x);
         temp->power(&board,ALLKEY);
         break;
 
@@ -56,7 +59,8 @@ void Board::move(uint player_number, std::pair<int,int> source, Board::MoveDIR d
             throw std::invalid_argument(" ");
         board[x][y-1]=temp;
         board[x][y]=NULL;
-        temp->setRow(y-1);
+        temp->setCol(y-1);
+        temp->setRow(x);
         temp->power(&board,ALLKEY);
         break;
     }
@@ -100,6 +104,8 @@ Soldier* Board::findClosest(uint player_number, uint placeRow,uint placeCol ){
                 continue;
             if(board[i][j]!=NULL){
                 temp= board[i][j];
+                temp->setRow(i);
+                temp->setCol(j);
                 distT=sqrt(pow(temp->getRow()-placeRow,2)+pow(temp->getCol()-placeCol,2));
                 if(temp->isAlive()){
                     if(temp->getTeam()!=player_number){

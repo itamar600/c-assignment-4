@@ -9,6 +9,8 @@ void FootCommander::power(void* b, int key){
     board=(WarGame::Board*) b;
     Soldier* s= board->findClosest(this->team, this->row, this->col);
     s->changeLife(DAMAGE);
+    if (s==NULL)
+        return;
     board->powerAll(this->team, FOOTKEY);
 
 }

@@ -7,6 +7,8 @@ void FootSoldier::power(void* b, int key){
     WarGame::Board* board;
     board=(WarGame::Board*) b;
     Soldier* s= board->findClosest(this->team, this->row, this->col);
+    if (s==NULL)
+        return;
     s->changeLife(DAMAGE);
 }
 

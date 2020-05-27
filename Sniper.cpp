@@ -7,6 +7,8 @@ void Sniper::power(void* b, int key){
     WarGame::Board* board;
     board=(WarGame::Board*) b;
     Soldier* s= board->findCostest(this->team);
+    if (s==NULL)
+        return;
     s->changeLife(DAMAGE);
 }
 

@@ -7,17 +7,18 @@ void Paramedic::power(void* b, int key){
     WarGame::Board* board;
     Soldier* temp;
     board=(WarGame::Board*) b;
+    WarGame::Board myBoard=*board;
     int area[3]={1,0,-1};
     for(int i= 0; i< 3; i++){
         for(int j=0; j<3; j++){
             if(area[i]==0 && area[j]==0)
                 continue;
             try{
-                temp=(*board)[{(this->getRow()+area[i]),(this->getCol()+area[j])}];
+                temp=myBoard[{(this->getRow()+area[i]),(this->getCol()+area[j])}];
                 if(temp!= NULL && temp->isAlive() && temp->getTeam()==team)
                     temp->changeLife(FULLHEALTH);
             }
-            catch(std::exception e){
+            catch(const std::invalid_argument& e){
                 continue;
             }
         }

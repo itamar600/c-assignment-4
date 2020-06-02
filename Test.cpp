@@ -258,8 +258,8 @@ TEST_CASE("Sniper"){
     board.move(1, {3,7}, Board::MoveDIR::Up);
     board.move(1, {3,3}, Board::MoveDIR::Up);
     CHECK(board.has_soldiers(2)==true);
-    CHECK_THROWS_AS(board.move(2, {5,7}, Board::MoveDIR::Up), std::invalid_argument);
-    board.move(1, {4,7}, Board::MoveDIR::Up);
+    CHECK_THROWS_AS(board.move(2, {5,0}, Board::MoveDIR::Up), std::invalid_argument);
+    board.move(1, {4,7}, Board::MoveDIR::Down);
     CHECK(board.has_soldiers(2)==false);
 }
 
@@ -267,19 +267,25 @@ TEST_CASE("Paramedic"){
     WarGame::Board board( 8,  8);
     board[{3,7}] = new Sniper(1);
     board[{3,3}] = new SniperCommander(1);
-    board[{5,6}] = new Paramedic(2);
-    board[{5,1}] = new ParamedicCommander(2);
+    board[{4,1}] = new Paramedic(2);
+    board[{4,6}] = new ParamedicCommander(2);
 	board[{5,0}] = new FootSoldier(2);
     board[{5,7}] = new FootSoldier(2);
     board.move(1, {3,7}, Board::MoveDIR::Up);
+    //cout<<board[{4,1}]->getLife()<<" , "<<board[{5,0}]->getLife()<<" , "<<board[{5,7}]->getLife()<<" , "<<board[{4,6}]->getLife()<<endl;
     board.move(1, {3,3}, Board::MoveDIR::Up);
+     //cout<<board[{4,1}]->getLife()<<" , "<<board[{5,0}]->getLife()<<" , "<<board[{5,7}]->getLife()<<" , "<<board[{4,6}]->getLife()<<endl;
+    board.move(1, {4,7}, Board::MoveDIR::Down);
+     //cout<<board[{4,1}]->getLife()<<" , "<<board[{5,0}]->getLife()<<" , "<<board[{5,7}]->getLife()<<" , "<<board[{4,6}]->getLife()<<endl;
+    CHECK(board.has_soldiers(2)==true);
+    board.move(2, {4,6}, Board::MoveDIR::Up);
+    //cout<<board[{4,1}]->getLife()<<" , "<<board[{5,0}]->getLife()<<" , "<<board[{5,7}]->getLife()<<" , "<<board[{5,6}]->getLife()<<endl;
+    board.move(1, {4,3}, Board::MoveDIR::Up);
+    //cout<<board[{5,1}]->getLife()<<" , "<<board[{4,6}]->getLife()<<endl;
+    board.move(1, {3,7}, Board::MoveDIR::Up);
+    //cout<<board[{4,6}]->getLife()<<endl;
     board.move(1, {4,7}, Board::MoveDIR::Down);
     CHECK(board.has_soldiers(2)==true);
-    board.move(2, {5,1}, Board::MoveDIR::Up);
-    board.move(1, {4,3}, Board::MoveDIR::Up);
-    board.move(1, {3,7}, Board::MoveDIR::Up);
-    board.move(1, {4,7}, Board::MoveDIR::Down);
-    CHECK(board.has_soldiers(2)==false);
     board.move(1, {5,3}, Board::MoveDIR::Down);
     CHECK(board.has_soldiers(2)==false);
 }
